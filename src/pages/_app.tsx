@@ -1,8 +1,10 @@
-import { NextPage } from 'next';
-import { AppProps } from 'next/dist/next-server/lib/router/router';
+import React from 'react';
 import Head from 'next/head';
+import { AppProps } from 'next/app';
+import 'normalize.css';
+import '@/styles/global.css';
 
-const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
+const App: React.FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
@@ -13,4 +15,4 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-export default MyApp;
+export default App;
