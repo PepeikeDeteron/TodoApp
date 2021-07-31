@@ -14,9 +14,9 @@ const Input = styled.input``;
 const Button = styled.button``;
 
 // タスクを入力するコンポーネント
-const TaskInput: React.FC<Props> = ({ tasks, setTasks }) => {
+const TaskInput: React.FC<Props> = (props) => {
   const [text, setText] = useState<string>('');
-  const [count, setCount] = useState(tasks.length + 1);
+  const [count, setCount] = useState<number>(props.tasks.length + 1);
 
   const handleSubmit = () => {
     setCount(count + 1);
@@ -31,7 +31,7 @@ const TaskInput: React.FC<Props> = ({ tasks, setTasks }) => {
     };
 
     // tasksにnewTaskの値を追加し，入力フォームをリセット
-    setTasks([newTask, ...tasks]);
+    props.setTasks([newTask, ...props.tasks]);
     setText('');
   };
 

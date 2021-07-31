@@ -24,11 +24,11 @@ const StyledNoRegisterSVG = styled(NoRegisterSVG)`
 `;
 
 // タスク一覧を表示するコンポーネント
-const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
+const TaskList: React.FC<Props> = (props) => {
   // タスクの完了
   const handleTaskDone = (task: Task) => {
     // idで同一判定をし，checkedの真偽を反転
-    setTasks((items) =>
+    props.setTasks((items) =>
       items.map((item) =>
         item.id === task.id ? { ...task, checked: !task.checked } : item
       )
@@ -38,13 +38,13 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
   // タスクの削除
   const handleTaskDelete = (task: Task) => {
     // idが同一の場合を抽出
-    setTasks((items) => items.filter((item) => item.id !== task.id));
+    props.setTasks((items) => items.filter((item) => item.id !== task.id));
   };
 
   // タスクの編集
   const handleTaskEdit = (task: Task) => {
     // idで同一判定をし，editの真偽を反転
-    setTasks((items) =>
+    props.setTasks((items) =>
       items.map((item) =>
         item.id === task.id ? { ...task, edit: !task.edit } : item
       )
@@ -53,14 +53,14 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
 
   return (
     <>
-      {tasks.length == 0 ? (
+      {props.tasks.length == 0 ? (
         <>
           <NoRegister>登録されたタスクはありません</NoRegister>
           <StyledNoRegisterSVG />
         </>
       ) : (
         <Tasks>
-          {tasks.map((task) => (
+          {props.tasks.map((task) => (
             <TaskItem
               key={task.id}
               tasks={task}
