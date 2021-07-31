@@ -2,6 +2,7 @@ import React from 'react';
 import TaskItem from '@/components/TaskItem';
 import { Task } from '@/models/Task';
 import styled from 'styled-components';
+import NoRegisterSVG from '../../../public/no_register.svg';
 
 type Props = {
   tasks: Task[];
@@ -9,6 +10,18 @@ type Props = {
 };
 
 const Tasks = styled.ul``;
+
+const NoRegister = styled.p`
+  font-size: 2rem;
+  text-align: center;
+  margin: 6rem 0 0;
+  user-select: none;
+`;
+
+const StyledNoRegisterSVG = styled(NoRegisterSVG)`
+  display: block;
+  margin: 3rem auto 0;
+`;
 
 // タスク一覧を表示するコンポーネント
 const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
@@ -39,9 +52,12 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
   };
 
   return (
-    <div>
+    <>
       {tasks.length == 0 ? (
-        '登録されたタスクはありません'
+        <>
+          <NoRegister>登録されたタスクはありません</NoRegister>
+          <StyledNoRegisterSVG />
+        </>
       ) : (
         <Tasks>
           {tasks.map((task) => (
@@ -55,7 +71,7 @@ const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
           ))}
         </Tasks>
       )}
-    </div>
+    </>
   );
 };
 
