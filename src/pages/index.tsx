@@ -17,8 +17,8 @@ const Home: React.FC = () => {
         <title>タスク管理アプリ</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header title="タスク管理アプリ" />
-      <RegisterButton content="タスクを登録する" />
+      <Header />
+      <RegisterButton />
       <TaskList setTasks={setTasks} tasks={tasks} />
       {/* <TaskInput setTasks={setTasks} tasks={tasks} /> */}
     </>

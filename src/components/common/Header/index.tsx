@@ -3,15 +3,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-type HeaderProps = {
-  title: string;
-};
-
-const Header: React.VFC<HeaderProps> = (props) => {
+const Header: React.VFC = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h4">{props.title}</Typography>
+        <Typography variant="h4">タスク管理アプリ</Typography>
       </Toolbar>
     </AppBar>
   );

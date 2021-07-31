@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import RegisterDialog from '@/components/common/RegisterDialog';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
-
-type ButtonProps = {
-  content: string;
-};
 
 const StyledButton = styled(Button)`
   width: 20rem;
@@ -13,11 +10,23 @@ const StyledButton = styled(Button)`
   margin: 5rem auto 0;
 `;
 
-const RegisterButton: React.VFC<ButtonProps> = (props) => {
+const RegisterButton: React.VFC = () => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleDialogOpen = () => setOpen(true);
+  const handleDialogClose = () => setOpen(false);
+
   return (
-    <StyledButton variant="contained" color="primary">
-      {props.content}
-    </StyledButton>
+    <>
+      <StyledButton
+        variant="contained"
+        color="primary"
+        onClick={handleDialogOpen}
+      >
+        タスクを登録する
+      </StyledButton>
+      <RegisterDialog open={open} close={handleDialogClose} />
+    </>
   );
 };
 
