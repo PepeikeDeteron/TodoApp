@@ -3,8 +3,8 @@ import Head from 'next/head';
 import { Task } from '@/models/Task';
 import TaskInput from '@/components/TaskInput';
 import TaskList from '@/components/TaskList';
-import Header from '@/components/common/Header';
-import RegisterButton from '@/components/common/RegisterButton';
+import Header from '@/components/Header';
+import RegisterButton from '@/components/RegisterButton';
 
 const initialState: Task[] = [];
 
