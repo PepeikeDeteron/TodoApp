@@ -1,3 +1,9 @@
+export type Tasks = {
+  content: string;
+  dueDate: Date | null;
+  priority: number | number[];
+};
+
 export type Task = {
   id: number; // id
   value: string; // 入力内容
