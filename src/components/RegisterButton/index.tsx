@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import RegisterDialog from '@/components/common/RegisterDialog';
+import RegisterDialog from '@/components/RegisterDialog';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
