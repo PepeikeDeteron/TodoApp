@@ -1,15 +1,14 @@
-import React from 'react';
-import TaskItem from '@/components/TaskItem';
-import { Task } from '@/models/Task';
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import NoRegisterSVG from '../../../public/no_register.svg';
-
-type Props = {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-};
-
-const Tasks = styled.ul``;
+import { taskTableState } from '@/atoms/TaskTable';
+import Fab from '@material-ui/core/Fab';
+import Box from '@material-ui/core/Box';
+import AddIcon from '@material-ui/icons/Add';
+import TaskTable from '@/components/TaskTable';
+import RegisterButton from '@/components/RegisterButton';
+import RegisterDialog from '@/components/RegisterDialog';
 
 const NoRegister = styled.p`
   font-size: 2rem;
@@ -23,54 +22,42 @@ const StyledNoRegisterSVG = styled(NoRegisterSVG)`
   margin: 3rem auto 0;
 `;
 
-// タスク一覧を表示するコンポーネント
-const TaskList: React.FC<Props> = (props) => {
-  // タスクの完了
-  const handleTaskDone = (task: Task) => {
-    // idで同一判定をし，checkedの真偽を反転
-    props.setTasks((items) =>
-      items.map((item) =>
-        item.id === task.id ? { ...task, checked: !task.checked } : item
-      )
-    );
-  };
+const StyledFab = styled(Fab)`
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+`;
 
-  // タスクの削除
-  const handleTaskDelete = (task: Task) => {
-    // idが同一の場合を抽出
-    props.setTasks((items) => items.filter((item) => item.id !== task.id));
-  };
+const TaskList: React.VFC = () => {
+  const tasks = useRecoilValue(taskTableState);
 
-  // タスクの編集
-  const handleTaskEdit = (task: Task) => {
-    // idで同一判定をし，editの真偽を反転
-    props.setTasks((items) =>
-      items.map((item) =>
-        item.id === task.id ? { ...task, edit: !task.edit } : item
-      )
-    );
-  };
+  const [open, setOpen] = useState<boolean>(false);
+  const handleDialogOpen = () => setOpen(true);
+  const handleDialogClose = () => setOpen(false);
 
   return (
     <>
-      {props.tasks.length == 0 ? (
-        <>
-          <NoRegister>登録されたタスクはありません</NoRegister>
-          <StyledNoRegisterSVG />
-        </>
-      ) : (
-        <Tasks>
-          {props.tasks.map((task) => (
-            <TaskItem
-              key={task.id}
-              tasks={task}
-              handleTaskDone={handleTaskDone}
-              handleTaskDelete={handleTaskDelete}
-              handleTaskEdit={handleTaskEdit}
-            />
-          ))}
-        </Tasks>
-      )}
+      <Box>
+        {tasks.length == 0 ? (
+          <>
+            <NoRegister>登録されたタスクはありません</NoRegister>
+            <RegisterButton />
+            <StyledNoRegisterSVG />
+          </>
+        ) : (
+          <>
+            <TaskTable />
+            <StyledFab
+              color="primary"
+              aria-label="add"
+              onClick={handleDialogOpen}
+            >
+              <AddIcon />
+            </StyledFab>
+          </>
+        )}
+      </Box>
+      <RegisterDialog open={open} close={handleDialogClose} />
     </>
   );
 };

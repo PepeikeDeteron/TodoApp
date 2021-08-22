@@ -32,7 +32,7 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
         priority: taskPriority,
       },
     ]);
-    props.close();
+    props.close;
   };
 
   return (
