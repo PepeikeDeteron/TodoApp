@@ -1,12 +1,12 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import styled from 'styled-components';
 import DateFnsUtils from '@date-io/date-fns';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Grid from '@material-ui/core/Grid';
 import Slider from '@material-ui/core/Slider';
 import TextField from '@material-ui/core/TextField';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import {
   taskContentState,
@@ -14,17 +14,19 @@ import {
   taskPriorityState,
 } from '@/atoms/TaskContent';
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    margin: {
-      height: theme.spacing(2),
-    },
-  })
-);
+const StyledSlider = styled(Slider)`
+  height: 2rem;
+`;
+
+const StyledDatePicker = styled(DatePicker)`
+  user-select: none;
+`;
+
+const StyledDialogContentText = styled(DialogContentText)`
+  user-select: none;
+`;
 
 const TaskContent: React.VFC = () => {
-  const classes = useStyles();
-
   const setContent = useSetRecoilState(taskContentState);
   const [dueDate, setDueDate] = useRecoilState(taskDueDateState);
   const [priority, setPriority] = useRecoilState(taskPriorityState);
@@ -73,7 +75,7 @@ const TaskContent: React.VFC = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <DatePicker
+              <StyledDatePicker
                 id="date-picker-inline"
                 label="タスク期限"
                 variant="dialog"
@@ -86,12 +88,11 @@ const TaskContent: React.VFC = () => {
             </Grid>
             <Grid container item>
               <Grid item xs={2}>
-                <DialogContentText>優先度</DialogContentText>
+                <StyledDialogContentText>優先度</StyledDialogContentText>
               </Grid>
               <Grid item xs={5}>
-                <Slider
+                <StyledSlider
                   aria-label="Custom marks"
-                  className={classes.margin}
                   marks={marks}
                   min={1}
                   max={3}

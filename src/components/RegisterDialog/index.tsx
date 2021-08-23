@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 import {
@@ -14,6 +15,10 @@ type DialogProps = {
   open: boolean;
   close: () => void;
 };
+
+const StyledDialogTitle = styled(DialogTitle)`
+  user-select: none;
+`;
 
 const RegisterDialog: React.VFC<DialogProps> = (props) => {
   const taskContent = useRecoilValue(taskContentState);
@@ -46,7 +51,7 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
         aria-labelledby="form-dialog-title"
         fullWidth
       >
-        <DialogTitle>登録するタスクを入力してください</DialogTitle>
+        <StyledDialogTitle>登録するタスクを入力してください</StyledDialogTitle>
         <TaskContent />
         <DialogActions>
           <Button onClick={props.close}>戻る</Button>
