@@ -38,7 +38,7 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
       },
     ]);
     handleFormClear();
-    props.close;
+    props.close();
   };
 
   return (
