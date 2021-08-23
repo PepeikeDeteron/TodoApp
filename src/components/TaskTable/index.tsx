@@ -1,17 +1,17 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { taskTableState } from '@/atoms/TaskTable';
-import { Tasks } from '@/models/Task';
 import { format } from 'date-fns';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
-import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
-import IconButton from '@material-ui/core/IconButton';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Checkbox from '@material-ui/core/Checkbox';
+import { taskTableState } from '@/atoms/TaskTable';
+import { Tasks } from '@/models/Task';
 
 type Props = {
   tasks?: Tasks[];
