@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { format } from 'date-fns';
+import styled from 'styled-components';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
@@ -16,6 +17,19 @@ import { Tasks } from '@/models/Task';
 type Props = {
   tasks?: Tasks[];
 };
+
+const StyledIconButton = styled(IconButton)`
+  position: relative;
+  top: 1rem;
+`;
+
+const StyledDeleteIcon = styled(DeleteIcon)`
+  font-size: 3rem;
+`;
+
+const StyledTableCell = styled(TableCell)`
+  font-size: 1.5rem;
+`;
 
 const TaskTable: React.VFC<Props> = () => {
   const [tasks, setTasks] = useRecoilState(taskTableState);
@@ -44,21 +58,21 @@ const TaskTable: React.VFC<Props> = () => {
 
   return (
     <>
-      <IconButton
+      <StyledIconButton
         aria-label="delete"
         onClick={handleTaskDelete}
         disabled={tasks.length === 0}
       >
-        <DeleteIcon />
-      </IconButton>
+        <StyledDeleteIcon />
+      </StyledIconButton>
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell>タスク</TableCell>
-              <TableCell>期限</TableCell>
-              <TableCell>優先度</TableCell>
+              <StyledTableCell>タスク</StyledTableCell>
+              <StyledTableCell>期限</StyledTableCell>
+              <StyledTableCell>優先度</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
