@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableContainer from '@material-ui/core/TableContainer';
 
 type Props = {
-  tasks: Tasks[];
+  tasks?: Tasks[];
 };
 
 const TaskTable: React.VFC<Props> = () => {
@@ -32,7 +32,9 @@ const TaskTable: React.VFC<Props> = () => {
             {tasks.map((task: Tasks, index: number) => (
               <TableRow key={index}>
                 <TableCell>{task.content}</TableCell>
-                <TableCell>{format(task.dueDate, 'yyyy/MM/dd')}</TableCell>
+                <TableCell>
+                  {format(task.dueDate as number | Date, 'yyyy/MM/dd')}
+                </TableCell>
                 <TableCell>{task.priority}</TableCell>
               </TableRow>
             ))}
