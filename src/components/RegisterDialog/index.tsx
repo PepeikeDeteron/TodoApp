@@ -1,14 +1,15 @@
 import React from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
 import {
   taskContentState,
   taskDueDateState,
   taskPriorityState,
 } from '@/atoms/TaskContent';
 import { taskTableState } from '@/atoms/TaskTable';
+import TaskContent from '@/components/TaskContent';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import TaskContent from '@/components/TaskContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 
@@ -24,20 +25,19 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
   const preTaskContent = useSetRecoilState(taskContentState);
   const [tasks, setTasks] = useRecoilState(taskTableState);
 
-  const handleFormClear = () => {
-    preTaskContent('');
-  };
-
   const handleTaskRegister = () => {
     setTasks([
       ...tasks,
       {
+        id: uuidv4(),
         content: taskContent,
         dueDate: taskDueDate,
         priority: taskPriority,
+        done: false,
       },
     ]);
-    handleFormClear();
+
+    preTaskContent('');
     props.close();
   };
 
