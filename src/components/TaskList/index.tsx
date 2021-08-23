@@ -38,7 +38,7 @@ const TaskList: React.VFC = () => {
   return (
     <>
       <Box>
-        {tasks.length == 0 ? (
+        {tasks.length <= 0 ? (
           <>
             <NoRegister>登録されたタスクはありません</NoRegister>
             <RegisterButton />

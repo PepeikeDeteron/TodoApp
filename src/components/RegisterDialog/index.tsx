@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   taskContentState,
   taskDueDateState,
@@ -21,7 +21,12 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
   const taskContent = useRecoilValue(taskContentState);
   const taskDueDate = useRecoilValue(taskDueDateState);
   const taskPriority = useRecoilValue(taskPriorityState);
+  const preTaskContent = useSetRecoilState(taskContentState);
   const [tasks, setTasks] = useRecoilState(taskTableState);
+
+  const handleFormClear = () => {
+    preTaskContent('');
+  };
 
   const handleTaskRegister = () => {
     setTasks([
@@ -32,6 +37,7 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
         priority: taskPriority,
       },
     ]);
+    handleFormClear();
     props.close;
   };
 
