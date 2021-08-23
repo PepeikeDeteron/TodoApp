@@ -1,16 +1,14 @@
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { v4 as uuidv4 } from 'uuid';
+import { Button, Dialog, DialogActions, DialogTitle } from '@material-ui/core';
 import {
   taskContentState,
   taskDueDateState,
   taskPriorityState,
 } from '@/atoms/TaskContent';
 import { taskTableState } from '@/atoms/TaskTable';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
 import TaskContent from '@/components/TaskContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
 
 type DialogProps = {
   open: boolean;
@@ -21,18 +19,23 @@ const RegisterDialog: React.VFC<DialogProps> = (props) => {
   const taskContent = useRecoilValue(taskContentState);
   const taskDueDate = useRecoilValue(taskDueDateState);
   const taskPriority = useRecoilValue(taskPriorityState);
+  const preTaskContent = useSetRecoilState(taskContentState);
   const [tasks, setTasks] = useRecoilState(taskTableState);
 
   const handleTaskRegister = () => {
     setTasks([
       ...tasks,
       {
+        id: uuidv4(),
         content: taskContent,
         dueDate: taskDueDate,
         priority: taskPriority,
+        done: false,
       },
     ]);
-    props.close;
+
+    preTaskContent('');
+    props.close();
   };
 
   return (

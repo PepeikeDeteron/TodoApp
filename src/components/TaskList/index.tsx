@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import Box from '@material-ui/core/Box';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import NoRegisterSVG from '../../../public/no_register.svg';
 import { taskTableState } from '@/atoms/TaskTable';
-import Fab from '@material-ui/core/Fab';
-import Box from '@material-ui/core/Box';
-import AddIcon from '@material-ui/icons/Add';
-import TaskTable from '@/components/TaskTable';
 import RegisterButton from '@/components/RegisterButton';
 import RegisterDialog from '@/components/RegisterDialog';
+import TaskTable from '@/components/TaskTable';
 
 const NoRegister = styled.p`
   font-size: 2rem;
@@ -38,7 +38,7 @@ const TaskList: React.VFC = () => {
   return (
     <>
       <Box>
-        {tasks.length == 0 ? (
+        {tasks.length <= 0 ? (
           <>
             <NoRegister>登録されたタスクはありません</NoRegister>
             <RegisterButton />

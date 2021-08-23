@@ -1,18 +1,18 @@
 import React from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import DateFnsUtils from '@date-io/date-fns';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Grid from '@material-ui/core/Grid';
+import Slider from '@material-ui/core/Slider';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import {
   taskContentState,
   taskDueDateState,
   taskPriorityState,
 } from '@/atoms/TaskContent';
-import DateFnsUtils from '@date-io/date-fns';
-import Grid from '@material-ui/core/Grid';
-import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
